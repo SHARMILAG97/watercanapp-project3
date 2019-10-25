@@ -1,0 +1,4 @@
+CREATE TABLE stock_availability(
+date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+stock_id INT PRIMARY KEY AUTO_INCREMENT,
+available_cans INT);
