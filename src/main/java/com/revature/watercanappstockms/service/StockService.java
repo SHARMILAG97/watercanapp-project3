@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.watercanappstockms.Message.MessageConstant;
+import com.revature.watercanappstockms.dto.StockInfo;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
 import com.revature.watercanappstockms.repository.StockRepository;
@@ -23,7 +24,9 @@ public class StockService {
 		return list;
 	}
 
-	public Stock updateCans(int updatecans) throws ServiceException {
+	public Stock updateCans(StockInfo stockinfo) throws ServiceException {
+		
+	int	updatecans= stockinfo.getUpdatecans();
 
 		if (updatecans <= 0)
 			throw new ServiceException(MessageConstant.UNABLE_TO_UPDATE);

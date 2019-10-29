@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.watercanappstockms.dto.StockInfo;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
 import com.revature.watercanappstockms.service.StockService;
@@ -25,7 +27,7 @@ public class StockController {
 	@Autowired
 	StockService stock;
 
-	@GetMapping("/viewStock")
+	@GetMapping("viewStock")
 	@ApiOperation("viewStock")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Viewed Successfully", response = Stock.class),
 			@ApiResponse(code = 400, message = "View failed") })
@@ -49,13 +51,13 @@ public class StockController {
 	@PostMapping("/update")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Updated Successfully", response = Message.class),
 			@ApiResponse(code = 400, message = "Update failed") })
-	public ResponseEntity<?> update(@RequestParam("updatecans") int updatecans) {
+	public ResponseEntity<?> update(@RequestBody StockInfo stockinfo) {
 
 		String errorMessage = null;
 		String Message = null;
 
 		try {
-			stock.updateCans(updatecans);
+			stock.updateCans(stockinfo);
 			Message = "Updated Successfully";
 		} catch (ServiceException e) {
 			e.printStackTrace();
