@@ -2,7 +2,6 @@ package com.revature.watercanappstockms.controller;
 
 import java.util.List;
 
-
 import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,7 +46,6 @@ public class StockController {
 			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 	}
 
-	// @PutMapping("/update")
 	@PostMapping("/update")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Updated Successfully", response = Message.class),
 			@ApiResponse(code = 400, message = "Update failed") })
@@ -55,9 +53,10 @@ public class StockController {
 
 		String errorMessage = null;
 		String Message = null;
+		Stock result =null;
 
 		try {
-			stock.updateCans(stockinfo);
+			result=stock.updateCans(stockinfo);
 			Message = "Updated Successfully";
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -65,12 +64,12 @@ public class StockController {
 		}
 
 		if (Message != null)
-			return new ResponseEntity<>(Message, HttpStatus.OK);
+			return new ResponseEntity<>(result , HttpStatus.OK);
 		else
 			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 
 	}
-	
+
 	@PostMapping("/updateOrderedCans")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Ordered Successfully", response = Message.class),
 			@ApiResponse(code = 400, message = "Order failed") })
