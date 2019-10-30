@@ -3,7 +3,7 @@ package com.revature.watercanappstockms.dto;
 import lombok.Data;
 
 @Data
-public class StockInfo {
+public class StockDTO {
 	
 	private int updatecans;
 
