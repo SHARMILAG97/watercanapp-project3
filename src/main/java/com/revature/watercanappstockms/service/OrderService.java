@@ -21,6 +21,7 @@ public class OrderService {
 	       System.out.println(getForEntity);
 	       OrderDTO orderdto = getForEntity.getBody();
 	       int ordercans = orderdto.getOrdercans();
+	       System.out.println(ordercans);
 		return ordercans;
 	    }
 }

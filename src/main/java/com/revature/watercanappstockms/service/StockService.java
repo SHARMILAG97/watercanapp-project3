@@ -16,6 +16,9 @@ public class StockService {
 
 	@Autowired
 	StockRepository stockrepository;
+	
+	@Autowired
+	OrderService orderservice;
 
 	public List<Stock> viewStock() {
 
@@ -57,7 +60,7 @@ public class StockService {
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
 
-		OrderService orderservice = new OrderService();
+	
 
 		int orderedcans = orderservice.orderStock();
 
