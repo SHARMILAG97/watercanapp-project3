@@ -62,9 +62,9 @@ public class StockService {
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
 
-		//int orderedcans = orderservice.orderStock();
-		int orderedcans = orderDTO.getOrdercans();
-
+		//int orderedcans = orderDTO.getOrdercans();
+		int orderedcans = orderservice.orderStock();
+		System.out.println("orderedcans: "+orderedcans);
 		int newcans = availcans - orderedcans;
 
 		stock.setAvailableCans(newcans);
@@ -76,7 +76,7 @@ public class StockService {
 	}
 
 	public void reserveCans(ReserveDTO reserveDTO) {
-		
+
 		List<Stock> list = stockrepository.findAll();
 
 		int availcans = 0;
@@ -84,11 +84,12 @@ public class StockService {
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
 
-		//int orderedcans = orderservice.orderStock();
 		int reservedcans = reserveDTO.getReservedcans();
-
+		System.out.println("reservedcans: "+reservedcans);
+		
 		int newcans = availcans - reservedcans;
-
+		System.out.println("newcans: "+newcans);
+		
 		stock.setAvailableCans(newcans);
 
 		stockrepository.save(stock);
