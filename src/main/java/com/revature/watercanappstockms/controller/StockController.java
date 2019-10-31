@@ -2,7 +2,7 @@ package com.revature.watercanappstockms.controller;
 
 import java.util.List;
 
-import org.apache.logging.log4j.message.Message;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.watercanappstockms.dto.Message;
 import com.revature.watercanappstockms.dto.OrderDTO;
 import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
@@ -27,8 +28,8 @@ import io.swagger.annotations.ApiResponses;
 public class StockController {
 
 	@Autowired
-	StockService stock;
-	
+	StockService stockService;
+
 	@Autowired
 	OrderService order;
 
@@ -41,7 +42,7 @@ public class StockController {
 		List<Stock> list = null;
 		String errorMessage = null;
 		try {
-			list = stock.viewStock();
+			list = stockService.viewStock();
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorMessage = e.getMessage();
@@ -58,22 +59,21 @@ public class StockController {
 	public ResponseEntity<?> update(@RequestBody StockDTO stockinfo) {
 
 		String errorMessage = null;
-		String Message = null;
-		Stock result =null;
+		Stock result = null;
 
 		try {
-			result=stock.updateCans(stockinfo);
-			Message = "Updated Successfully";
+			result = stockService.updateCans(stockinfo);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			errorMessage = e.getMessage();
 		}
 
-		if (Message != null)
-			return new ResponseEntity<>(result , HttpStatus.OK);
-		else
-			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
-
+		if (result != null)
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		else {
+			Message message = new Message(errorMessage);
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@PostMapping("/updateOrderedCans")
@@ -85,10 +85,9 @@ public class StockController {
 		String Message = null;
 
 		try {
-			
-			
-			stock.orderCans(orderDTO);
-			
+
+			stockService.orderCans(orderDTO);
+
 			Message = "Ordered Success";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,7 +100,7 @@ public class StockController {
 			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 
 	}
-	
+
 	@PostMapping("/updateReservedCans")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserved Successfully", response = Message.class),
 			@ApiResponse(code = 400, message = "Reserve failed") })
@@ -111,10 +110,9 @@ public class StockController {
 		String Message = null;
 
 		try {
-			
-			
-			stock.reserveCans(reserveDTO);
-			
+
+			stockService.reserveCans(reserveDTO);
+
 			Message = "Reserved Success";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,5 +125,20 @@ public class StockController {
 			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 
 	}
-
+	
+	/*
+	 * @GetMapping("viewOrders")
+	 * 
+	 * @ApiOperation("ViewOrders API")
+	 * 
+	 * @ApiResponses(value = { @ApiResponse(code = 200, message =
+	 * "Viewed Successfully", response = Message.class),
+	 * 
+	 * @ApiResponse(code = 400, message = "View failed") }) public ResponseEntity<?>
+	 * viewOrders() { List<OrderDTO> list = null; String errorMessage = null; try {
+	 * list = order.viewOrders(); } catch (ServiceException e) {
+	 * e.printStackTrace(); errorMessage=e.getMessage(); } if (list != null) return
+	 * new ResponseEntity<>(list, HttpStatus.OK); else return new
+	 * ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST); }
+	 */
 }
