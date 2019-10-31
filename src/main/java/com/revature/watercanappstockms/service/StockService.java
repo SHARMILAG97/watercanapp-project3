@@ -32,23 +32,16 @@ public class StockService {
 	public Stock updateCans(StockDTO stockinfo) throws ServiceException {
 
 		int updatecans = stockinfo.getUpdatecans();
-		Stock stock = new Stock();
 		
 		if (updatecans <= 0)
 			throw new ServiceException(MessageConstant.UNABLE_TO_UPDATE);
 		
 
 		List<Stock> list = stockrepository.findAll();
-		
-		if(list == null) {
-			
-			stock.setAvailableCans(updatecans);
-			stockrepository.save(stock);
-		}
-		else {
+	
 		int availcans = 0;
 
-		 stock = list.get(0);
+		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
 
 		int newcans = availcans + updatecans;
@@ -56,7 +49,7 @@ public class StockService {
 		stock.setAvailableCans(newcans);
 
 		stockrepository.save(stock);
-		}
+		
 		return stock;
 	}
 
