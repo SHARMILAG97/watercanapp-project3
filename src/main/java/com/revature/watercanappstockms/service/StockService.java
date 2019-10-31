@@ -62,8 +62,8 @@ public class StockService {
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
 
-		//int orderedcans = orderDTO.getOrdercans();
-		int orderedcans = orderservice.orderStock();
+		int orderedcans = orderDTO.getOrderCans();
+	//	int orderedcans = orderservice.orderStock();
 		System.out.println("orderedcans: "+orderedcans);
 		int newcans = availcans - orderedcans;
 

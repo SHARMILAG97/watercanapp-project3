@@ -20,7 +20,7 @@ public class OrderService {
 	       ResponseEntity<OrderDTO> getForEntity = restTemplate.getForEntity(apiUrl+"/orderCan", OrderDTO.class);
 	       System.out.println(getForEntity);
 	       OrderDTO orderdto = getForEntity.getBody();
-	       int ordercans = orderdto.getOrdercans();
+	       int ordercans = orderdto.getOrderCans();
 	       System.out.println(ordercans);
 		return ordercans;
 	    }
