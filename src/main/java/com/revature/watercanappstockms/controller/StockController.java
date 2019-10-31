@@ -15,6 +15,7 @@ import com.revature.watercanappstockms.dto.OrderDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
+import com.revature.watercanappstockms.service.OrderService;
 import com.revature.watercanappstockms.service.StockService;
 
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,9 @@ public class StockController {
 
 	@Autowired
 	StockService stock;
+	
+	@Autowired
+	OrderService order;
 
 	@GetMapping("viewStock")
 	@ApiOperation("viewStock")
@@ -80,8 +84,11 @@ public class StockController {
 		String Message = null;
 
 		try {
-			stock.orderCans(orderDTO);
-			Message = "Ordered Successfully";
+			
+			
+			stock.orderCans();
+			
+			Message = "Ordered Success";
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorMessage = "Unable to Order";
