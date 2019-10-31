@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ReserveDTO {
 	
-	private int reservedcans;
+	private int reservedCans;
 
 }
