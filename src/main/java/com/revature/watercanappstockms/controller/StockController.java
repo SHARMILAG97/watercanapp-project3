@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.watercanappstockms.dto.OrderDTO;
+import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
@@ -92,6 +93,32 @@ public class StockController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorMessage = "Unable to Order";
+		}
+
+		if (Message != null)
+			return new ResponseEntity<>(Message, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+
+	}
+	
+	@PostMapping("/updateReservedCans")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserved Successfully", response = Message.class),
+			@ApiResponse(code = 400, message = "Reserve failed") })
+	public ResponseEntity<?> reserveCans(@RequestBody ReserveDTO reserveDTO) {
+
+		String errorMessage = null;
+		String Message = null;
+
+		try {
+			
+			
+			stock.reserveCans(reserveDTO);
+			
+			Message = "Reserved Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMessage = "Unable to reserve";
 		}
 
 		if (Message != null)

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.watercanappstockms.Message.MessageConstant;
 import com.revature.watercanappstockms.dto.OrderDTO;
+import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
@@ -71,6 +72,26 @@ public class StockService {
 		stockrepository.save(stock);
 
 		return stock;
+
+	}
+
+	public void reserveCans(ReserveDTO reserveDTO) {
+		
+		List<Stock> list = stockrepository.findAll();
+
+		int availcans = 0;
+
+		Stock stock = list.get(0);
+		availcans = stock.getAvailableCans();
+
+		//int orderedcans = orderservice.orderStock();
+		int reservedcans = reserveDTO.getReservedcans();
+
+		int newcans = availcans - reservedcans;
+
+		stock.setAvailableCans(newcans);
+
+		stockrepository.save(stock);
 
 	}
 
