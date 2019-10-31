@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.watercanappstockms.dto.OrderDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
@@ -73,13 +74,13 @@ public class StockController {
 	@PostMapping("/updateOrderedCans")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Ordered Successfully", response = Message.class),
 			@ApiResponse(code = 400, message = "Order failed") })
-	public ResponseEntity<?> orderCans() {
+	public ResponseEntity<?> orderCans(@RequestBody OrderDTO orderDTO) {
 
 		String errorMessage = null;
 		String Message = null;
 
 		try {
-			stock.orderCans();
+			stock.orderCans(orderDTO);
 			Message = "Ordered Successfully";
 		} catch (Exception e) {
 			e.printStackTrace();
