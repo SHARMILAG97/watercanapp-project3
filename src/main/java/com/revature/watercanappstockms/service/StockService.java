@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.watercanappstockms.Message.MessageConstant;
+import com.revature.watercanappstockms.dto.OrderDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
@@ -51,7 +52,7 @@ public class StockService {
 
 	}
 
-	public Stock orderCans() {
+	public Stock orderCans(OrderDTO orderDTO) {
 
 		List<Stock> list = stockrepository.findAll();
 
@@ -60,8 +61,8 @@ public class StockService {
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
 
-		int orderedcans = orderservice.orderStock();
-		//int orderedcans = orderdto.getOrdercans();
+		//int orderedcans = orderservice.orderStock();
+		int orderedcans = orderDTO.getOrdercans();
 
 		int newcans = availcans - orderedcans;
 

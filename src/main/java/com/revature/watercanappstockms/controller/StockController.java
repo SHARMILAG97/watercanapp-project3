@@ -86,7 +86,7 @@ public class StockController {
 		try {
 			
 			
-			stock.orderCans();
+			stock.orderCans(orderDTO);
 			
 			Message = "Ordered Success";
 		} catch (Exception e) {
