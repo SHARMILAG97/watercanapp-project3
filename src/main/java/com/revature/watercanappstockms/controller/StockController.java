@@ -2,7 +2,6 @@ package com.revature.watercanappstockms.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -125,20 +124,5 @@ public class StockController {
 			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 
 	}
-	
-	/*
-	 * @GetMapping("viewOrders")
-	 * 
-	 * @ApiOperation("ViewOrders API")
-	 * 
-	 * @ApiResponses(value = { @ApiResponse(code = 200, message =
-	 * "Viewed Successfully", response = Message.class),
-	 * 
-	 * @ApiResponse(code = 400, message = "View failed") }) public ResponseEntity<?>
-	 * viewOrders() { List<OrderDTO> list = null; String errorMessage = null; try {
-	 * list = order.viewOrders(); } catch (ServiceException e) {
-	 * e.printStackTrace(); errorMessage=e.getMessage(); } if (list != null) return
-	 * new ResponseEntity<>(list, HttpStatus.OK); else return new
-	 * ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST); }
-	 */
+
 }
