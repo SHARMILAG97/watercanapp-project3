@@ -18,8 +18,6 @@ public class StockService {
 	@Autowired
 	StockRepository stockrepository;
 
-	@Autowired
-	OrderService orderservice;
 
 	public List<Stock> viewStock() {
 

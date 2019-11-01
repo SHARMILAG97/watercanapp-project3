@@ -16,7 +16,7 @@ import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
 import com.revature.watercanappstockms.model.Stock;
-import com.revature.watercanappstockms.service.OrderService;
+import com.revature.watercanappstockms.service.ModifyService;
 import com.revature.watercanappstockms.service.StockService;
 
 import io.swagger.annotations.ApiOperation;
@@ -30,7 +30,7 @@ public class StockController {
 	StockService stockService;
 
 	@Autowired
-	OrderService order;
+	ModifyService modifyservice;
 
 	@GetMapping("viewStock")
 	@ApiOperation("viewStock")
@@ -124,5 +124,31 @@ public class StockController {
 			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 
 	}
+	
+	@PostMapping("/modifiedReservedCan")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserved Successfully", response = Message.class),
+			@ApiResponse(code = 400, message = "Reserve failed") })
+	public ResponseEntity<?> modifyReserve(@RequestBody ReserveDTO reserveDTO) {
+
+		String errorMessage = null;
+		String Message = null;
+
+		try {
+
+			modifyservice.modifyReserve(reserveDTO);
+
+			Message = "Reserved Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMessage = "Unable to reserve";
+		}
+
+		if (Message != null)
+			return new ResponseEntity<>(Message, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+
+	}
+	
 
 }
