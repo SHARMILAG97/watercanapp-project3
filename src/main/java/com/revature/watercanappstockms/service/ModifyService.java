@@ -17,19 +17,24 @@ public class ModifyService {
 	@Autowired
 	StockRepository stockrepository;
 
-	@Autowired
-	private RestTemplate restTemplate;
-
-	String apiUrl = "https://watercanapp-reserve-ms.herokuapp.com/";
+	/*
+	 * @Autowired private RestTemplate restTemplate;
+	 * 
+	 * String apiUrl = "https://watercanapp-reserve-ms.herokuapp.com/";
+	 */
 
 	public Stock modifyReserve(ReserveDTO reserveDTO2) {
-		ResponseEntity<ReserveDTO> getForEntity = restTemplate.getForEntity(apiUrl + "/modifiedReservedCan",
-				ReserveDTO.class);
-		System.out.println(getForEntity);
-		ReserveDTO reservedto = getForEntity.getBody();
+		/*
+		 * ResponseEntity<ReserveDTO> getForEntity = restTemplate.getForEntity(apiUrl +
+		 * "/modifiedReservedCan", ReserveDTO.class); System.out.println(getForEntity);
+		 * ReserveDTO reservedto = getForEntity.getBody();
+		 */
 		int ordercans = reserveDTO2.getReservedOrderCans();
 		int reservecans = reserveDTO2.getReservedCans();
 
+		System.out.println("ordercans: "+ordercans);
+		System.out.println("reservecans: "+reservecans);
+		
 		List<Stock> list = stockrepository.findAll();
 
 		int availcans = 0;
@@ -37,6 +42,8 @@ public class ModifyService {
 
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
+		
+		System.out.println("availcans: "+availcans);
 
 		if (ordercans > reservecans) {
 
@@ -49,6 +56,7 @@ public class ModifyService {
 
 		}
 
+		System.out.println("availcans: "+availcans);
 		stock.setAvailableCans(availcans);
 
 		stockrepository.save(stock);

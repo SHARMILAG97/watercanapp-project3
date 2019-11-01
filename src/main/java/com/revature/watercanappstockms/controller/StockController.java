@@ -149,6 +149,54 @@ public class StockController {
 			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 
 	}
+	@PostMapping("/cancelReserve")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Ordered Successfully", response = Message.class),
+			@ApiResponse(code = 400, message = "Order failed") })
+	public ResponseEntity<?> cancelReserve(@RequestBody ReserveDTO reserveDTO) {
+
+		String errorMessage = null;
+		String Message = null;
+
+		try {
+
+			stockService.cancelReserve(reserveDTO);
+
+			Message = "Ordered Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMessage = "Unable to Order";
+		}
+
+		if (Message != null)
+			return new ResponseEntity<>(Message, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+
+	}
 	
+	@PostMapping("/cancelOrder")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserved Successfully", response = Message.class),
+			@ApiResponse(code = 400, message = "Reserve failed") })
+	public ResponseEntity<?> cancelOrder(@RequestBody OrderDTO orderDTO) {
+
+		String errorMessage = null;
+		String Message = null;
+
+		try {
+
+			stockService.cancelOrder(orderDTO);
+
+			Message = "Reserved Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMessage = "Unable to Reserve";
+		}
+
+		if (Message != null)
+			return new ResponseEntity<>(Message, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+
+	}
 
 }
