@@ -18,21 +18,23 @@ public class ModifyService {
 	@Autowired
 	StockRepository stockrepository;
 
-	@Autowired
-	private RestTemplate restTemplate;
+	/*
+	 * @Autowired private RestTemplate restTemplate;
+	 * 
+	 * String apiUrl = "https://watercanapp-reserve-ms.herokuapp.com/";
+	 */
 
-	String apiUrl = "https://watercanapp-reserve-ms.herokuapp.com/";
+	public Stock modifyReserve(ReserveDTO reserveDTO2) {
 
-	public Stock modifyReserve(ModifyReserveDTO reserveDTO2) {
-
-		ResponseEntity<ReserveDTO> getForEntity = restTemplate.getForEntity(apiUrl + "/modifiedReservedCans",
-				ReserveDTO.class);
-		System.out.println(getForEntity);
-		ReserveDTO reservedto = getForEntity.getBody();
+		/*
+		 * ResponseEntity<ReserveDTO> getForEntity = restTemplate.getForEntity(apiUrl +
+		 * "/modifiedReservedCans", ReserveDTO.class); System.out.println(getForEntity);
+		 * ReserveDTO reservedto = getForEntity.getBody();
+		 */
 		
-		int reservecans = reservedto.getReservedCans();
+		//int reservecans = reservedto.getReservedCans();
 		int ordercans = reserveDTO2.getReservedOrderCans();
-		// int reservecans = reserveDTO2.getReservedCans();
+		 int reservecans = reserveDTO2.getReservedCans();
 
 		System.out.println("ordercans: " + ordercans);
 		System.out.println("reservecans: " + reservecans);

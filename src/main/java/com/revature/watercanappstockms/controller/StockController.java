@@ -129,7 +129,7 @@ public class StockController {
 	@PostMapping("/modifiedReservedCan")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserve Modified Successfully", response = Message.class),
 			@ApiResponse(code = 400, message = "Reserve Modify failed") })
-	public ResponseEntity<?> modifyReserve(@RequestBody ModifyReserveDTO reserveDTO) {
+	public ResponseEntity<?> modifyReserve(@RequestBody ReserveDTO reserveDTO) {
 
 		String errorMessage = null;
 		String Message = null;
