@@ -126,8 +126,8 @@ public class StockController {
 	}
 	
 	@PostMapping("/modifiedReservedCan")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserved Successfully", response = Message.class),
-			@ApiResponse(code = 400, message = "Reserve failed") })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserve Modified Successfully", response = Message.class),
+			@ApiResponse(code = 400, message = "Reserve Modify failed") })
 	public ResponseEntity<?> modifyReserve(@RequestBody ReserveDTO reserveDTO) {
 
 		String errorMessage = null;
@@ -137,10 +137,10 @@ public class StockController {
 
 			modifyservice.modifyReserve(reserveDTO);
 
-			Message = "Reserved Success";
+			Message = "Reserve Modified Successfully";
 		} catch (Exception e) {
 			e.printStackTrace();
-			errorMessage = "Unable to reserve";
+			errorMessage = "Reserve Modify failed";
 		}
 
 		if (Message != null)
@@ -150,8 +150,8 @@ public class StockController {
 
 	}
 	@PostMapping("/cancelReserve")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Ordered Successfully", response = Message.class),
-			@ApiResponse(code = 400, message = "Order failed") })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserve Cancelled Successfully", response = Message.class),
+			@ApiResponse(code = 400, message = "Reserve Cancel failed") })
 	public ResponseEntity<?> cancelReserve(@RequestBody ReserveDTO reserveDTO) {
 
 		String errorMessage = null;
@@ -161,10 +161,10 @@ public class StockController {
 
 			stockService.cancelReserve(reserveDTO);
 
-			Message = "Ordered Success";
+			Message = "Reserve Cancelled Successfully";
 		} catch (Exception e) {
 			e.printStackTrace();
-			errorMessage = "Unable to Order";
+			errorMessage = "Reserve Cancel failed";
 		}
 
 		if (Message != null)
@@ -175,8 +175,8 @@ public class StockController {
 	}
 	
 	@PostMapping("/cancelOrder")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserved Successfully", response = Message.class),
-			@ApiResponse(code = 400, message = "Reserve failed") })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Order Cancelled Successfully", response = Message.class),
+			@ApiResponse(code = 400, message = "Order Cancel failed") })
 	public ResponseEntity<?> cancelOrder(@RequestBody OrderDTO orderDTO) {
 
 		String errorMessage = null;
@@ -186,10 +186,10 @@ public class StockController {
 
 			stockService.cancelOrder(orderDTO);
 
-			Message = "Reserved Success";
+			Message = "Order Cancelled Successfully";
 		} catch (Exception e) {
 			e.printStackTrace();
-			errorMessage = "Unable to Reserve";
+			errorMessage = "Order Cancel failed";
 		}
 
 		if (Message != null)
