@@ -6,5 +6,6 @@ import lombok.Data;
 public class StockDTO {
 	
 	private int updatecans;
+	private int availableCans;
 
 }

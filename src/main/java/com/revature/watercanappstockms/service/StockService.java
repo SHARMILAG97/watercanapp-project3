@@ -4,13 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.revature.watercanappstockms.Message.MessageConstant;
 import com.revature.watercanappstockms.dto.OrderDTO;
 import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
+import com.revature.watercanappstockms.exception.ValidatorException;
 import com.revature.watercanappstockms.model.Stock;
 import com.revature.watercanappstockms.repository.StockRepository;
+import com.revature.watercanappstockms.validator.OrderValidation;
+import com.revature.watercanappstockms.validator.ReserveValidator;
 
 @Service
 public class StockService {
@@ -50,7 +54,10 @@ public class StockService {
 		return stock;
 	}
 
-	public Stock orderCans(OrderDTO orderDTO) {
+	public Stock orderCans(OrderDTO orderDTO) throws ValidatorException {
+		
+	
+		
 
 		List<Stock> list = stockrepository.findAll();
 
@@ -58,6 +65,9 @@ public class StockService {
 
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
+		
+		OrderValidation validate = new OrderValidation();
+		validate.validateOrder(orderDTO,availcans);
 
 		int orderedcans = orderDTO.getOrderCans();
 		System.out.println("orderedcans: "+orderedcans);
@@ -71,7 +81,7 @@ public class StockService {
 
 	}
 
-	public void reserveCans(ReserveDTO reserveDTO) {
+	public void reserveCans(ReserveDTO reserveDTO) throws ValidatorException {
 
 		List<Stock> list = stockrepository.findAll();
 
@@ -79,6 +89,9 @@ public class StockService {
 
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
+		
+		ReserveValidator validate = new ReserveValidator();
+		validate.validateReserve(reserveDTO,availcans);
 
 		int reservedcans = reserveDTO.getReservedCans();
 		System.out.println("reservedcans: "+reservedcans);

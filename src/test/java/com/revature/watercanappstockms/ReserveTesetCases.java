@@ -1,29 +1,67 @@
 package com.revature.watercanappstockms;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.revature.watercanappstockms.dto.ReserveDTO;
+import com.revature.watercanappstockms.exception.ValidatorException;
+import com.revature.watercanappstockms.service.StockService;
 
 public class ReserveTesetCases {
 	
-	int availcans = 1000;
-	int validreservecans = 500;
+	@Autowired
+	StockService stockservice;
 	
+	ReserveDTO reserve = new ReserveDTO();
+
 	@Test
 	public void validTest() {
+
 	
-		assertTrue(availcans>validreservecans);
+		reserve.setReserveId(1);
+		reserve.setReservedCans(10);
+		reserve.setUserId(1);
+		try {
+			stockservice.reserveCans(reserve);
+		} catch (ValidatorException e) {
+			e.printStackTrace();
+		}
+		assertNotNull(reserve);
 	}
-	
+
 	@Test
 	public void invalidTest() {
+
 	
-		assertFalse(availcans<validreservecans);
-		assertNotEquals(validreservecans,0);
-		assertNotEquals(validreservecans,-1);
-		
-		
+		reserve.setReserveId(-464);
+		reserve.setReservedCans(-4146);
+		reserve.setUserId(-956);
+		try {
+			stockservice.reserveCans(reserve);
+		} catch (ValidatorException e) {
+			e.printStackTrace();
+		}
+		assertNotNull(reserve);
+
 	}
+
+	@Test
+	public void invalidZeroTest() {
+
+		reserve.setReserveId(0);
+		reserve.setReservedCans(0);
+		reserve.setUserId(0);
+		try {
+			stockservice.reserveCans(reserve);
+		} catch (ValidatorException e) {
+			e.printStackTrace();
+		}
+		assertNotNull(reserve);
+
+	}
+
+	
+	
 }

@@ -1,61 +1,66 @@
 package com.revature.watercanappstockms;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import com.revature.watercanappstockms.dto.StockDTO;
+import com.revature.watercanappstockms.exception.ServiceException;
+import com.revature.watercanappstockms.service.StockService;
+
+
+@SpringBootTest
 public class AdminTestCases {
 	
-	String name = "Naresh";
-	String pwd = "naresh";
+	@Autowired
+	StockService stockservice;
+
 
 	@Test
 	public void validTest() {
 
-		assertEquals("Naresh",name);
-		assertEquals("naresh",pwd);
-		
+		StockDTO stock = new StockDTO();
+		stock.setUpdatecans(100);
+		try {
+			stockservice.updateCans(stock);
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		assertNotNull(stock);
 	}
 
 	@Test
 	public void invalidTest() {
 		
-		assertNotEquals(name,"kjnhbghj54");
-		assertNotEquals(pwd,"cdfgt87456");
+		StockDTO stock = new StockDTO();
+		stock.setUpdatecans(-100);
+		try {
+			stockservice.updateCans(stock);
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		assertNotNull(stock);
 		
 	}
 	
 	@Test
-	public void invalidNameTest() {
+	public void invalidZeroTest() {
 		
-		assertNotEquals("NARESH",name);
-		assertEquals("naresh",pwd);
-		
-	}
-	
-	@Test
-	public void invalidPwdTest() {
-		
-		assertEquals("Naresh",name);
-		assertNotEquals("NARESH",pwd);
-		
-	}
-	
-	@Test
-	public void caseSensitiveNameTest() {
-		
-		assertNotEquals("NARESH",name);
-		assertEquals("naresh",pwd);
+		StockDTO stock = new StockDTO();
+		stock.setUpdatecans(0);
+		try {
+			stockservice.updateCans(stock);
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		assertNotNull(stock);
 		
 	}
 	
-	@Test
-	public void caseSensitivePwdTest() {
-		
-		assertEquals("Naresh",name);
-		assertNotEquals("NARESH",pwd);
-		
-	}
 	
 }
