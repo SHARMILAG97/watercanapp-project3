@@ -20,7 +20,6 @@ public class OrderTesetCases {
 	public void validTest() {
 
 		OrderDTO order = new OrderDTO();
-		order.setId(1);
 		order.setOrderCans(10);
 		order.setUserId(1);
 		try {
@@ -35,7 +34,6 @@ public class OrderTesetCases {
 	public void invalidTest() {
 
 		OrderDTO order = new OrderDTO();
-		order.setId(-464);
 		order.setOrderCans(-4146);
 		order.setUserId(-956);
 		try {
@@ -51,7 +49,6 @@ public class OrderTesetCases {
 	public void invalidZeroTest() {
 
 		OrderDTO order = new OrderDTO();
-		order.setId(0);
 		order.setOrderCans(0);
 		order.setUserId(0);
 		try {

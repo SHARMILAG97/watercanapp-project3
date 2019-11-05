@@ -22,7 +22,6 @@ public class StockService {
 	@Autowired
 	StockRepository stockrepository;
 
-
 	public List<Stock> viewStock() {
 
 		List<Stock> list = null;
@@ -33,13 +32,12 @@ public class StockService {
 	public Stock updateCans(StockDTO stockinfo) throws ServiceException {
 
 		int updatecans = stockinfo.getUpdatecans();
-		
+
 		if (updatecans <= 0)
 			throw new ServiceException(MessageConstant.UNABLE_TO_UPDATE);
-		
 
 		List<Stock> list = stockrepository.findAll();
-	
+
 		int availcans = 0;
 
 		Stock stock = list.get(0);
@@ -50,14 +48,11 @@ public class StockService {
 		stock.setAvailableCans(newcans);
 
 		stockrepository.save(stock);
-		
+
 		return stock;
 	}
 
 	public Stock orderCans(OrderDTO orderDTO) throws ValidatorException {
-		
-	
-		
 
 		List<Stock> list = stockrepository.findAll();
 
@@ -65,12 +60,12 @@ public class StockService {
 
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
-		
+
 		OrderValidation validate = new OrderValidation();
-		validate.validateOrder(orderDTO,availcans);
+		validate.validateOrder(orderDTO, availcans);
 
 		int orderedcans = orderDTO.getOrderCans();
-		System.out.println("orderedcans: "+orderedcans);
+		System.out.println("orderedcans: " + orderedcans);
 		int newcans = availcans - orderedcans;
 
 		stock.setAvailableCans(newcans);
@@ -89,22 +84,22 @@ public class StockService {
 
 		Stock stock = list.get(0);
 		availcans = stock.getAvailableCans();
-		
+
 		ReserveValidator validate = new ReserveValidator();
-		validate.validateReserve(reserveDTO,availcans);
+		validate.validateReserve(reserveDTO, availcans);
 
 		int reservedcans = reserveDTO.getReservedCans();
-		System.out.println("reservedcans: "+reservedcans);
-		
+		System.out.println("reservedcans: " + reservedcans);
+
 		int newcans = availcans - reservedcans;
-		System.out.println("newcans: "+newcans);
-		
+		System.out.println("newcans: " + newcans);
+
 		stock.setAvailableCans(newcans);
 
 		stockrepository.save(stock);
 
 	}
-	
+
 	public void cancelReserve(ReserveDTO reserveDTO) {
 
 		List<Stock> list = stockrepository.findAll();
@@ -115,11 +110,11 @@ public class StockService {
 		availcans = stock.getAvailableCans();
 
 		int reservedcans = reserveDTO.getReservedCans();
-		System.out.println("reservedcans: "+reservedcans);
-		
+		System.out.println("reservedcans: " + reservedcans);
+
 		int newcans = availcans + reservedcans;
-		System.out.println("newcans: "+newcans);
-		
+		System.out.println("newcans: " + newcans);
+
 		stock.setAvailableCans(newcans);
 
 		stockrepository.save(stock);
@@ -127,7 +122,7 @@ public class StockService {
 	}
 
 	public void cancelOrder(OrderDTO orderDTO) {
-		
+
 		List<Stock> list = stockrepository.findAll();
 
 		int availcans = 0;
@@ -136,17 +131,14 @@ public class StockService {
 		availcans = stock.getAvailableCans();
 
 		int orderedcans = orderDTO.getOrderCans();
-		System.out.println("reservedcans: "+orderedcans);
-		
+		System.out.println("reservedcans: " + orderedcans);
+
 		int newcans = availcans + orderedcans;
-		System.out.println("newcans: "+newcans);
-		
+		System.out.println("newcans: " + newcans);
+
 		stock.setAvailableCans(newcans);
 
 		stockrepository.save(stock);
 	}
-
-	
-	
 
 }
