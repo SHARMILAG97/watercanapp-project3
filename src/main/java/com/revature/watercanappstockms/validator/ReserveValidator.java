@@ -8,11 +8,10 @@ public class ReserveValidator {
 	public void validateReserve(ReserveDTO reservedto, int availcans) throws ValidatorException {
 		
 		int id=reservedto.getUserId();
-		int reserveid=reservedto.getReserveId();
 		int reserveCans=reservedto.getReservedCans();
 
 		
-		if(id<=0 || reserveid<=0 || reserveCans<=0 || reserveCans>availcans)
+		if(id<=0 || reserveCans<=0 || reserveCans>availcans)
 			throw new ValidatorException("Invalid Reserve");
 	}
 

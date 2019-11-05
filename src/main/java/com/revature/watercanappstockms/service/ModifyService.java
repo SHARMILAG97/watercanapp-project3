@@ -24,7 +24,7 @@ public class ModifyService {
 	 * String apiUrl = "https://watercanapp-reserve-ms.herokuapp.com/";
 	 */
 
-	public Stock modifyReserve(ReserveDTO reserveDTO2) {
+	public Stock modifyReserve(ModifyReserveDTO reserveDTO2) {
 
 		/*
 		 * ResponseEntity<ReserveDTO> getForEntity = restTemplate.getForEntity(apiUrl +

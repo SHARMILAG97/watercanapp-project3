@@ -5,7 +5,9 @@ import lombok.Data;
 @Data
 public class ModifyReserveDTO {
 	
-	private int reserveId;
-	 private int reservedOrderCans;
-
+	  private int reserveId;
+	    private int userId;
+	    private String userName;
+	    private int reservedCans;
+	    private int reservedOrderCans;
 }

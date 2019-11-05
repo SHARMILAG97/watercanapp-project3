@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.watercanappstockms.dto.Message;
+import com.revature.watercanappstockms.dto.ModifyReserveDTO;
 import com.revature.watercanappstockms.dto.OrderDTO;
 import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
@@ -129,7 +130,7 @@ public class StockController {
 	@PostMapping("/modifiedReservedCan")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Reserve Modified Successfully", response = Message.class),
 			@ApiResponse(code = 400, message = "Reserve Modify failed") })
-	public ResponseEntity<?> modifyReserve(@RequestBody ReserveDTO reserveDTO) {
+	public ResponseEntity<?> modifyReserve(@RequestBody ModifyReserveDTO reserveDTO) {
 
 		String errorMessage = null;
 		String Message = null;

@@ -19,8 +19,6 @@ public class ReserveTesetCases {
 	@Test
 	public void validTest() {
 
-	
-		reserve.setReserveId(1);
 		reserve.setReservedCans(10);
 		reserve.setUserId(1);
 		try {
@@ -34,8 +32,6 @@ public class ReserveTesetCases {
 	@Test
 	public void invalidTest() {
 
-	
-		reserve.setReserveId(-464);
 		reserve.setReservedCans(-4146);
 		reserve.setUserId(-956);
 		try {
@@ -50,7 +46,6 @@ public class ReserveTesetCases {
 	@Test
 	public void invalidZeroTest() {
 
-		reserve.setReserveId(0);
 		reserve.setReservedCans(0);
 		reserve.setUserId(0);
 		try {
