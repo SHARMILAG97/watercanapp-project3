@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.watercanappstockms.dto.Message;
-import com.revature.watercanappstockms.dto.ModifyReserveDTO;
 import com.revature.watercanappstockms.dto.OrderDTO;
 import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.dto.StockDTO;
 import com.revature.watercanappstockms.exception.ServiceException;
+import com.revature.watercanappstockms.exception.ValidatorException;
 import com.revature.watercanappstockms.model.Stock;
 import com.revature.watercanappstockms.service.ModifyService;
 import com.revature.watercanappstockms.service.StockService;
@@ -89,9 +89,9 @@ public class StockController {
 			stockService.orderCans(orderDTO);
 
 			Message = "Ordered Success";
-		} catch (Exception e) {
+		} catch (ValidatorException e) {
 			e.printStackTrace();
-			errorMessage = "Unable to Order";
+			errorMessage = e.getMessage();
 		}
 
 		if (Message != null)
@@ -114,9 +114,9 @@ public class StockController {
 			stockService.reserveCans(reserveDTO);
 
 			Message = "Reserved Success";
-		} catch (Exception e) {
+		} catch (ValidatorException e) {
 			e.printStackTrace();
-			errorMessage = "Unable to reserve";
+			errorMessage = e.getMessage();
 		}
 
 		if (Message != null)
