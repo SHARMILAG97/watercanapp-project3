@@ -44,7 +44,6 @@ public class AdminTestCases {
 			e.printStackTrace();
 		}
 		assertNotNull(stock);
-		
 	}
 	
 	@Test
@@ -59,7 +58,6 @@ public class AdminTestCases {
 			e.printStackTrace();
 		}
 		assertNotNull(stock);
-		
 	}
 	
 	

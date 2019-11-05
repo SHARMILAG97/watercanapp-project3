@@ -53,10 +53,15 @@ public class ModifyService {
 
 			newcans = ordercans - reservecans;
 			availcans -= newcans;
+			System.out.println("newcans:"+newcans);
+			System.out.println("availcans:"+availcans);
+			
 		} else {
 
 			newcans = reservecans - ordercans;
 			availcans += newcans;
+			System.out.println("newcans:"+newcans);
+			System.out.println("availcans:"+availcans);
 
 		}
 
