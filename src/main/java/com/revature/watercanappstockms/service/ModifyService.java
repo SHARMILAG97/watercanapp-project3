@@ -3,12 +3,9 @@ package com.revature.watercanappstockms.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.revature.watercanappstockms.dto.ModifyReserveDTO;
-import com.revature.watercanappstockms.dto.ReserveDTO;
 import com.revature.watercanappstockms.model.Stock;
 import com.revature.watercanappstockms.repository.StockRepository;
 

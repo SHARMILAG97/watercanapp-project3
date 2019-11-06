@@ -32,15 +32,19 @@ public class StockService {
 	public Stock updateCans(StockDTO stockinfo) throws ServiceException {
 
 		int updatecans = stockinfo.getUpdatecans();
+		
+		Stock stock = null;
 
-		if (updatecans <= 0)
+		if (updatecans <= 0) {
+			
 			throw new ServiceException(MessageConstant.UNABLE_TO_UPDATE);
-
+			
+		}
 		List<Stock> list = stockrepository.findAll();
 
 		int availcans = 0;
 
-		Stock stock = list.get(0);
+	    stock = list.get(0);
 		availcans = stock.getAvailableCans();
 
 		int newcans = availcans + updatecans;
@@ -52,7 +56,14 @@ public class StockService {
 		return stock;
 	}
 
-	public Stock orderCans(OrderDTO orderDTO) throws ValidatorException {
+	public Stock orderCans(OrderDTO orderDTO) throws ValidatorException, ServiceException {
+		
+		int ordercans =orderDTO.getOrderCans() ;
+		int userid = orderDTO.getUserId();
+		
+		if (ordercans <= 0 || userid<=0) 
+			throw new ServiceException(MessageConstant.UNABLE_TO_ORDER);
+			
 
 		List<Stock> list = stockrepository.findAll();
 
@@ -76,8 +87,15 @@ public class StockService {
 
 	}
 
-	public void reserveCans(ReserveDTO reserveDTO) throws ValidatorException {
+	public void reserveCans(ReserveDTO reserveDTO) throws ValidatorException, ServiceException {
 
+		
+		int ordercans =reserveDTO.getReservedCans();
+		int userid = reserveDTO.getUserId();
+		
+		if (ordercans <= 0 || userid<=0) 
+			throw new ServiceException(MessageConstant.UNABLE_TO_RESERVE);
+		
 		List<Stock> list = stockrepository.findAll();
 
 		int availcans = 0;

@@ -90,7 +90,7 @@ public class StockController {
 			stockService.orderCans(orderDTO);
 
 			Message = "Ordered Success";
-		} catch (ValidatorException e) {
+		} catch (ValidatorException | ServiceException e) {
 			e.printStackTrace();
 			errorMessage = e.getMessage();
 		}
@@ -115,7 +115,7 @@ public class StockController {
 			stockService.reserveCans(reserveDTO);
 
 			Message = "Reserved Success";
-		} catch (ValidatorException e) {
+		} catch (ValidatorException | ServiceException e) {
 			e.printStackTrace();
 			errorMessage = e.getMessage();
 		}
@@ -176,29 +176,28 @@ public class StockController {
 
 	}
 	
-	@PostMapping("/cancelOrder")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Order Cancelled Successfully", response = Message.class),
-			@ApiResponse(code = 400, message = "Order Cancel failed") })
-	public ResponseEntity<?> cancelOrder(@RequestBody OrderDTO orderDTO) {
-
-		String errorMessage = null;
-		String Message = null;
-
-		try {
-
-			stockService.cancelOrder(orderDTO);
-
-			Message = "Order Cancelled Successfully";
-		} catch (Exception e) {
-			e.printStackTrace();
-			errorMessage = "Order Cancel failed";
-		}
-
-		if (Message != null)
-			return new ResponseEntity<>(Message, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
-
-	}
+	/*
+	 * @PostMapping("/cancelOrder")
+	 * 
+	 * @ApiResponses(value = { @ApiResponse(code = 200, message =
+	 * "Order Cancelled Successfully", response = Message.class),
+	 * 
+	 * @ApiResponse(code = 400, message = "Order Cancel failed") }) public
+	 * ResponseEntity<?> cancelOrder(@RequestBody OrderDTO orderDTO) {
+	 * 
+	 * String errorMessage = null; String Message = null;
+	 * 
+	 * try {
+	 * 
+	 * stockService.cancelOrder(orderDTO);
+	 * 
+	 * Message = "Order Cancelled Successfully"; } catch (Exception e) {
+	 * e.printStackTrace(); errorMessage = "Order Cancel failed"; }
+	 * 
+	 * if (Message != null) return new ResponseEntity<>(Message, HttpStatus.OK);
+	 * else return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+	 * 
+	 * }
+	 */
 
 }
